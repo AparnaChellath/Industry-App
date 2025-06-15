@@ -1,0 +1,39 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Search Methods</h2>
+  
+  <form method="get" action="" class="mb-4">
+    <div class="input-group">
+      <input type="text" name="search" class="form-control" placeholder="Search by Method or Responsible Man"
+             value="{{ request.GET.search }}">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+  {% if methods %}
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Responsible Man</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for method in methods %}
+        <tr>
+          <td>{{ method.name }}</td>
+          <td>{{ method.description }}</td>
+          <td>{{ method.responsible_man }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No methods found.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

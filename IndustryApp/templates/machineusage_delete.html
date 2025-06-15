@@ -1,0 +1,25 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body text-center">
+            <h3 class="card-title text-danger mb-4">Confirm Deletion</h3>
+            <p>Are you sure you want to delete this machine usage record?</p>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item"><strong>Man:</strong> {{ object.man.name }}</li>
+                <li class="list-group-item"><strong>Machine:</strong> {{ object.machine.name }}</li>
+                <li class="list-group-item"><strong>Method:</strong> {{ object.method.name }}</li>
+                <li class="list-group-item"><strong>Start Time:</strong> {{ object.start_time }}</li>
+                <li class="list-group-item"><strong>End Time:</strong> {{ object.end_time }}</li>
+            </ul>
+
+            <form method="post" class="d-inline-block">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, delete</button>
+                <a href="{% url 'machineusage_list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

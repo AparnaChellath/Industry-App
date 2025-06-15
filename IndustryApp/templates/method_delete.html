@@ -1,0 +1,16 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Confirm Deletion</h2>
+        <p class="text-center">Are you sure you want to delete the method: <strong>{{ object.name }}</strong>?</p>
+        
+        <form method="post" class="d-flex justify-content-center gap-3">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'method_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

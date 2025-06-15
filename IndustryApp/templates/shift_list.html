@@ -1,0 +1,35 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Shifts</h2>
+    
+    <div class="text-end mb-3">
+        <a href="{% url 'shift_add' %}" class="btn btn-dark">Add New Shift</a>
+    </div>
+
+    
+        <table class="table table-bordered table-striped shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for shift in object_list %}
+                <tr>
+                    <td>{{ shift.name }}</td>
+                    <td>{{ shift.start_time }}</td>
+                    <td>{{ shift.end_time }}</td>
+                    <td>
+                        <a href="{% url 'shift_edit' shift.id%}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{% url 'shift_delete' shift.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tb
+
+{% endblock %}

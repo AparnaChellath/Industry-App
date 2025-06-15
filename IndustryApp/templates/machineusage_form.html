@@ -1,0 +1,35 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Add Machine Usage</h2>
+
+    <form method="post" class="bg-light p-4 rounded shadow-sm">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            {{ form.man.label_tag }}  
+            {{ form.man }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.start_time.label_tag }}  
+            {{ form.start_time }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.end_time.label_tag }}  
+            {{ form.end_time }}
+        </div>
+
+        <!-- Hidden Fields -->
+         {{ form.machine.label_tag }} 
+        {{ form.machine }}
+        {{ form.method.label_tag }} 
+        {{ form.method }}
+
+        <button type="submit" class="btn btn-dark">Save</button>
+        <a href="{% url 'machineusage_list' %}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

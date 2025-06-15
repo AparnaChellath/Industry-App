@@ -1,0 +1,36 @@
+{% extends "menu.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Machine List</h2>
+    <a href="{% url 'machine_add' %}" class="btn btn-dark mb-3">Add Machine</a>
+    <table class="table table-bordered table-dark">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Machine ID</th>
+                <th>Type</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for machine in object_list %}
+            <tr>
+                <td>{{ machine.name }}</td>
+                <td>{{ machine.id}}</td>
+                <td>{{ machine.type }}</td>
+                <td>{{ machine.status }}</td>
+                <td>
+                    <a href="{% url 'machine_edit' machine.id %}" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="{% url 'machine_delete' machine.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No machines found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

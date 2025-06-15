@@ -1,0 +1,18 @@
+{% extends 'menu.html' %}
+{% block content %}
+<div class="navbar bg-dark p-1 m-4 ">
+  <div class="container py-4">
+    {% if user.is_authenticated %}
+    <p class="text-light fs-3">Welcome, {{ user.username }}!</p>
+    {% endif %}
+  </div>
+</div>
+<div class="container m-4">
+  <h2>{{ view.object.pk|yesno:"Update Method,Add Method" }}</h2>
+  <form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+</div>
+
+{% endblock %}

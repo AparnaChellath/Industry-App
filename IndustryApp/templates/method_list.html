@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+
+  <title>Method</title>
+</head>
+
+<body>
+  <div class="navbar d-flex bg-dark p-1 m-4 ">
+    <div class="container py-4">
+      {% if user.is_authenticated %}
+      <p class="text-light fs-3">Welcome, {{ user.username }}!</p>
+      {% endif %}
+    </div>
+    <div>
+      <a href="{% url 'method_search' %}" class="btn btn-dark">Search</a>
+    </div>
+    <div class="dropdown me-4">
+  <button class="btn btn-light dropdown-toggle" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    Menu
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="menuDropdown">
+    <li><a class="dropdown-item" href="{% url 'man_list' %}">Man List</a></li>
+    <li><a class="dropdown-item" href="{% url 'man_add' %}">Add Man</a></li>
+    <li><a class="dropdown-item" href="{% url 'machine_list' %}">Machine</a></li>
+    <li><a class="dropdown-item" href="{% url 'material_list' %}">Materials</a></li>
+    <li><a class="dropdown-item" href="{% url 'shift_list' %}">Shift</a></li>
+    <li><a class="dropdown-item" href="{% url 'machineusage_list' %}">Machine Usage</a></li>
+  </ul>
+</div>
+  </div>
+  <h2 class="text-center ">Method List</h2>
+
+  <div class="table table-bordered d-flex justify-content-center m-4">
+
+    <table class="table table-bordered ">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Responsible man</th>
+          <th>Machines</th>
+          <th>Materials</th>
+          
+        </tr>
+        {% for method in methods %}
+        <tr>
+          <td>{{ method.name }}</td>
+          <td>{{ method.description }}</td>
+          <td>{{ method.responsible_man }}</td>
+          <td>{{ method.machines.all|join:", " }}</td>
+          <td>{{ method.materials.all|join:", " }}</td>
+          {% if method.responsible_man.user == user %}
+          <td>
+                    <a href="{% url 'method_edit' method.id %}" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="{% url 'method_delete' method.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+          <td>
+            
+          <a href="{% url 'assign_machines' method.responsible_man.id %}" class="btn btn-sm btn-dark mt-2">
+            Assign Machines
+          </a>
+          {% endif %}
+          </td>
+        </tr>
+        
+        {% endfor %}
+      </thead>
+
+
+
+    </table>
+
+
+  </div>
+
+  <a class="btn btn-dark" style="margin-left: 35rem; margin-top: 1rem;" href="{% url 'add_method' %}">Add New Method</a>
+  <p  style="margin-left: 30rem; margin-top: 5rem;"><i class="fa-solid fa-exclamation" style="color: #dd0e0e;"></i> Be a man in the industry before adding the method</p>
+ 
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>
