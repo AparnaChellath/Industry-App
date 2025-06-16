@@ -13,6 +13,9 @@ from .models import Shift, Man, Machine, Material, Method, MachineUsage
 from .serializers import ShiftSerializer, ManSerializer, MachineSerializer, MaterialSerializer, MethodSerializer, MachineUsageSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.contrib.auth.models import User
+from rest_framework.permissions import AllowAny
+from .serializers import UserSerializer, UserRegisterSerializer
 
 # Create your views here.
 
@@ -228,7 +231,15 @@ class MachineUsageDeleteView(DeleteView):
 
 
 
+class UserRegisterViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserRegisterSerializer
+    permission_classes = [AllowAny] 
 
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return UserRegisterSerializer
+        return UserSerializer
 
 
 class ShiftViewSet(viewsets.ModelViewSet):

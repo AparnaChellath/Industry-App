@@ -27,11 +27,12 @@ from rest_framework.authtoken import views as authview
 from IndustryApp import views
 
 router = DefaultRouter()
-router.register('shift',views.ShiftViewSet,basename="shift"),
-router.register('men',views.ManViewSet,basename="men"),
-router.register('machines',views.MachineViewSet,basename="machines"),
-router.register('materials',views.MaterialViewSet,basename="materials"),
-router.register('methods',views.MethodViewSet,basename="methods"),
+router.register('user', views.UserRegisterViewSet, basename='user')
+router.register('shift',views.ShiftViewSet,basename="shift")
+router.register('men',views.ManViewSet,basename="men")
+router.register('machines',views.MachineViewSet,basename="machines")
+router.register('materials',views.MaterialViewSet,basename="materials")
+router.register('methods',views.MethodViewSet,basename="methods")
 router.register('machineusage',views.MachineUsageViewSet,basename="machineusage")
 
 
